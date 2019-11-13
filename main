@@ -1,0 +1,74 @@
+import UIKit
+
+class ViewController: UIViewController {
+    var dotinput = false;
+    var newinput = true;
+    var cachenumber = "";           
+    var op = "";
+    @IBOutlet weak var shuru: UITextField!
+    
+    @IBAction func dotclick(_ sender: UIButton) {
+        if !dotinput{
+            shuru.text! += "."
+            dotinput = true
+        }
+    }
+    
+    @IBAction func one (_ sender: UIButton) {
+        let screenNum = Int(shuru.text! )
+        if dotinput{
+            shuru.text! += sender.titleLabel!.text!
+        }
+        else{
+            shuru.text = "\(screenNum! * 10 + Int(sender.titleLabel!.text!)!)"
+        }
+    }
+    @IBAction func chu(_ sender: UIButton) {
+        cachenumber = shuru.text!
+        op = sender.titleLabel!.text!
+        shuru.text = "0"
+        dotinput = false
+        newinput = true
+    }
+    func calculate()
+    {
+        let num1 = Double(cachenumber)!
+        let num2 = Double(shuru.text!)!
+        var result:Double
+        if "+" == op{
+            result = num1+num2
+        }
+        else if "-" == op{
+            result = num1-num2
+        }
+        else if "*" == op{
+            result = num1*num2
+        }
+        else if "/" == op{
+            result = num1/num2
+        }
+        else {
+            result = 0
+        }
+        shuru.text = "\(result)"
+        dotinput = false
+        newinput = true
+    }
+    @IBAction func dengyu(_ sender: UIButton) {
+        calculate()
+    }
+    
+    @IBAction func clearclick(_ sender: UIButton) {
+        dotinput = false
+        newinput = true
+        cachenumber = "0"
+        op = ""
+        shuru.text = "0"
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+
+
+}
